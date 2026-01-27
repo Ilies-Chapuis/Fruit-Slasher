@@ -4,6 +4,9 @@ FPS = 60
 FRUITS = [
     "Avocado", "Banana", "Cherry", "Grapes", "Green Apple", "Kiwi", "Lemon", "Melon", "Orange", "Peach", "Pear", "Pinneaple", "Red Apple", "Strawberry", "Watermelon"
 ]
+BOMB = ["Bomb"]
+ICE_CUBE = ["Ice Cube"]
+GOLDEN = ["Golden Fruit"]
 
 DIFFICULTY_CONFIG =  "Easy", "Normal", "Hard"
 
@@ -19,6 +22,7 @@ if DIFFICULTY_CONFIG == "Easy":
     ICE_SPEED_MAX =
     GENERAL_SPAWN_RATE =
     MAX_WINDOW = 7
+    MAX_LIVES = 5
 
 elif DIFFICULTY_CONFIG == "Normal":
     FRUITS_CHANCE = 0.65
@@ -35,6 +39,7 @@ elif DIFFICULTY_CONFIG == "Normal":
     GOLDEN_SPEED_MAX =
     GENERAL_SPAWN_RATE =
     MAX_WINDOW = 10
+    MAX_LIVES = 3
 
 elif DIFFICULTY_CONFIG == "Hard":
     FRUITS_CHANCE = 0.50
@@ -50,10 +55,10 @@ elif DIFFICULTY_CONFIG == "Hard":
     GOLDEN_SPEED_MIN =
     GOLDEN_SPEED_MAX =
     GENERAL_SPAWN_RATE =
+    MAX_WINDOW = 15
+    MAX_LIVES = 3
 
 
-BOMB_WORD = "bomb"
 
 SPAWN_RATE = 1300
-MAX_LIVES = 3
 FONT_SIZE = 32
