@@ -18,6 +18,7 @@ class Menu:
 
         self.create_buttons()
 
+
     def create_buttons(self):
         self.main_buttons = [
             Button("Jouer", 300, 200, 200, 50, self.start_game),
