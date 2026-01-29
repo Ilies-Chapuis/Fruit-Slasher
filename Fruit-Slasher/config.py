@@ -5,20 +5,20 @@ FPS = 60
 
 #  fruits avec leurs images
 FRUITS_IMAGES = {
-    "apple": "Images_Red_Apple.png",
-    "banana": "Images_Banana.png",
-    "cherry": "Images_Cherry.png",
-    "kiwi": "Images_Kiwi.png",
-    "orange": "Images_Orange.png",
-    "peach": "Images_Peach.png",
-    "pear": "Images_Pear.png",
-    "melon": "Images_Melon.png",
-    "avocado": "Images_Avocado.png",
-    "grapes": "Images_Grapes.png",
-    "lemon": "Images_Lemon.png",
-    "pineapple": "Images_Pinneaple.png",
-    "strawberry": "Images_Strawberry.png",
-    "watermelon": "Images_Watermelon.png"
+    "apple": "Red_Apple.png",
+    "banana": "Banana.png",
+    "cherry": "Cherry.png",
+    "kiwi": "Kiwi.png",
+    "orange": "Orange.png",
+    "peach": "Peach.png",
+    "pear": "Pear.png",
+    "melon": "Melon.png",
+    "avocado": "Avocado.png",
+    "grapes": "Grapes.png",
+    "lemon": "Lemon.png",
+    "pineapple": "Pinneaple.png",
+    "strawberry": "Strawberry.png",
+    "watermelon": "Watermelon.png"
 }
 
 FRUITS = list(FRUITS_IMAGES.keys())
@@ -63,16 +63,13 @@ DIFFICULTY_CONFIG = {
 def find_assets_path():
     #Trouve automatiquement le chemin vers les images
     possible_paths = [
-        "./Fruit-Slasher/Assets/Images",
         "./Assets/Images/",
         "Assets/Images/",
-        "./Assets/",
-        "Assets/",
         "./Images/",
         "Images/",
         "./",
         os.path.join(os.path.dirname(__file__), "Fruit-Slasher/Assets/Images"),
-        os.path.join(os.path.dirname(__file__), "Assets/Images/"),
+        os.path.join(os.path.dirname(__file__), "Assets/Images"),
         os.path.join(os.path.dirname(__file__), "Assets/"),
     ]
 
@@ -80,8 +77,10 @@ def find_assets_path():
         if os.path.exists(path):
             try:
                 files = os.listdir(path)
-                test_files = [f for f in files if f.startswith('Images_') and f.endswith('.png')]
+                test_files = [f for f in files if f.endswith('.png')]
                 has_wallpaper = WALLPAPER_FILENAME in files
+                print(path)
+
 
                 if test_files or has_wallpaper:
                     print(f"Images trouvees dans: {path}")
