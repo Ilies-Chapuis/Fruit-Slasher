@@ -24,9 +24,10 @@ FRUITS_IMAGES = {
 FRUITS = list(FRUITS_IMAGES.keys())
 
 # Nom du fichier wallpaper
-WALLPAPER_FILENAME = "Fruit_Slasher_Wallpaper__Base_.png"
+WALLPAPER_FILENAME = "Fruit Slasher Wallpaper (Bonus).jpg"
 
 BOMB_WORD = "bomb"
+BOMB_IMAGE = "Bomb.png"
 BOMB_CHANCE = 0.15
 
 FRUIT_SPEED_MIN = 1
@@ -43,19 +44,33 @@ DIFFICULTY_CONFIG = {
         "speed_min": 1,
         "speed_max": 2,
         "spawn_delay": 1800,
-        "bomb_chance": 0.05
+        "FRUITS_CHANCE" : 0.85,  # 85%
+        "BOMB_CHANCE" : 0.05 , # 5%
+        "ICE_CHANCE" : 0.10,  # 10%
+        "MAX_WINDOW" : 7,
+        "MAX_LIVES" : 5
     },
     "NORMAL": {
         "speed_min": 2,
         "speed_max": 4,
         "spawn_delay": 1300,
-        "bomb_chance": 0.15
+        "FRUITS_CHANCE": 0.65,  # 65%
+        "BOMB_CHANCE": 0.15,  # 15%
+        "ICE_CHANCE": 0.15,  # 15%
+        "GOLDEN_CHANCE": 0.5,  # 5%
+        "MAX_WINDOW": 10,
+        "MAX_LIVES": 3
     },
     "DIFFICILE": {
         "speed_min": 4,
         "speed_max": 7,
         "spawn_delay": 900,
-        "bomb_chance": 0.30
+        "FRUITS_CHANCE": 0.50,  # 50%
+        "BOMB_CHANCE": 0.30,  # 30%
+        "ICE_CHANCE": 0.5,  # 5%
+        "GOLDEN_CHANCE": 0.15,  # 15%
+        "MAX_WINDOW": 15,
+        "MAX_LIVES": 3
     }
 }
 

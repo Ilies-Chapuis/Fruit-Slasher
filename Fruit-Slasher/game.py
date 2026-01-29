@@ -40,7 +40,7 @@ class Game:
                 print(f"Erreur wallpaper: {e}")
 
     def spawn_fruit(self):
-        is_bomb = random.random() < self.diff["bomb_chance"]
+        is_bomb = random.random() < self.diff["BOMB_CHANCE"]
 
         if is_bomb:
             word = BOMB_WORD

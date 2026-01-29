@@ -100,6 +100,9 @@ class Settings:
             "lives": "Vies",
             "combo": "Combo",
             "game_over": "GAME OVER",
+            "easy": "FACILE",
+            "normal": "NORMALE",
+            "hard": "DIFFICILE"
         },
         "EN": {
             "play": "Play",
@@ -114,6 +117,9 @@ class Settings:
             "lives": "Lives",
             "combo": "Combo",
             "game_over": "GAME OVER",
+            "easy": "Easy",
+            "hard": "Hard",
+            "normal": "Normal",
         }
     }
 
