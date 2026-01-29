@@ -6,7 +6,7 @@ class Player:
 
     def add_score(self):
         self.combo += 1
-        bonus = 1 + self.combo // 3
+        bonus = 1 + self.combo // 5
         self.score += bonus
 
     def lose_life(self):
@@ -18,3 +18,5 @@ class Player:
 
     def alive(self):
         return self.lives > 0
+    
+    def history():
