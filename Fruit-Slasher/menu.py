@@ -2,7 +2,6 @@ import pygame
 import os
 from button import Button
 from settings import Settings
-from game import Game
 from config import WIDTH, HEIGHT, FPS, get_wallpaper_path
 
 
@@ -13,6 +12,7 @@ class Menu:
         pygame.display.set_caption("Fruit Ninja Typing")
         self.clock = pygame.time.Clock()
         self.font = pygame.font.SysFont(None, 36)
+        self.small_font = pygame.font.SysFont(None, 28)
         self.title_font = pygame.font.SysFont(None, 72)
 
         self.settings = Settings()
@@ -30,10 +30,9 @@ class Menu:
             except Exception as e:
                 print(f"Erreur wallpaper menu: {e}")
 
-        # Créer les boutons (sera recréé à chaque changement de langue)
         self.create_buttons()
 
-        # Démarrer la musique si activée
+        # Démarrer la musique
         if self.settings.music:
             self.settings.play_music()
 
@@ -48,29 +47,61 @@ class Menu:
         ]
 
         self.settings_buttons = [
-            Button(t("difficulty"), 250, 200, 300, 40, self.settings.cycle_difficulty),
-            Button(t("language"), 250, 250, 300, 40, self.change_language),
-            Button(t("music"), 250, 300, 300, 40, self.settings.toggle_music),
-            Button(t("change_music"), 250, 350, 300, 40, self.settings.cycle_music),
-            Button(t("back"), 300, 420, 200, 40, self.back)
+            Button(t("difficulty"), 220, 160, 360, 35, self.change_difficulty),
+            Button(t("game_mode"), 220, 205, 360, 35, self.change_game_mode),
+            Button(t("keyboard"), 220, 250, 360, 35, self.change_keyboard),
+            Button(t("language"), 220, 295, 360, 35, self.change_language),
+            Button(t("music"), 220, 340, 360, 35, self.toggle_music),
+            Button(t("change_music"), 220, 385, 360, 35, self.change_music_track),
+            Button(t("back"), 300, 450, 200, 40, self.back)
         ]
+
+    def change_difficulty(self):
+        """Change la difficulté"""
+        self.settings.cycle_difficulty()
+        print(f"Difficulte changee: {self.settings.difficulty}")
+
+    def change_game_mode(self):
+        """Change le mode de jeu"""
+        self.settings.cycle_game_mode()
+        print(f"Mode de jeu change: {self.settings.game_mode}")
+
+    def change_keyboard(self):
+        """Change le clavier"""
+        self.settings.cycle_keyboard()
+        print(f"Clavier change: {self.settings.keyboard_layout}")
 
     def change_language(self):
         """Change la langue et recrée les boutons"""
         self.settings.cycle_language()
-        self.create_buttons()  # Recréer les boutons avec les nouveaux textes
+        print(f"Langue changee: {self.settings.language}")
+        self.create_buttons()
+
+    def toggle_music(self):
+        """Active/désactive la musique"""
+        self.settings.toggle_music()
+        print(f"Musique: {'ON' if self.settings.music else 'OFF'}")
+
+    def change_music_track(self):
+        """Change la piste de musique"""
+        self.settings.cycle_music()
+        print(f"Piste changee: {self.settings.get_current_music_name()}")
 
     def start_game(self):
+        """Lance le jeu - import ici pour éviter l'import circulaire"""
+        from game import Game
         Game(self.settings).run()
-        # Relancer la musique après le jeu si elle était activée
+        # Relancer la musique après le jeu
         if self.settings.music:
             self.settings.play_music()
 
     def open_settings(self):
         self.state = "SETTINGS"
+        print("Ouverture des parametres")
 
     def back(self):
         self.state = "MAIN"
+        print("Retour au menu principal")
 
     def quit(self):
         self.settings.stop_music()
@@ -80,16 +111,21 @@ class Menu:
         """Affiche les valeurs actuelles des paramètres"""
         t = self.settings.t
 
+        # Mode de jeu avec description
+        mode_display = t("typing_mode") if self.settings.game_mode == "TYPING" else t("click_mode")
+
         infos = [
             f"{t('difficulty')} : {self.settings.difficulty}",
+            f"{t('game_mode')} : {mode_display}",
+            f"{t('keyboard')} : {self.settings.keyboard_layout}",
             f"{t('language')} : {self.settings.language}",
             f"{t('music')} : {'ON' if self.settings.music else 'OFF'}",
             f"Piste : {self.settings.get_current_music_name()}"
         ]
 
         for i, txt in enumerate(infos):
-            rendered = self.font.render(txt, True, (255, 200, 0))
-            self.screen.blit(rendered, (260, 160 + i * 50))
+            rendered = self.small_font.render(txt, True, (255, 200, 0))
+            self.screen.blit(rendered, (230, 125 + i * 45))
 
     def run(self):
         while self.running:
@@ -128,9 +164,13 @@ class Menu:
                     b.draw(self.screen, self.font)
 
             else:
+                # Titre des paramètres
+                settings_title = self.font.render(self.settings.t("settings"), True, (255, 150, 50))
+                self.screen.blit(settings_title, settings_title.get_rect(center=(WIDTH // 2, 60)))
+
                 self.draw_settings_values()
                 for b in self.settings_buttons:
-                    b.draw(self.screen, self.font)
+                    b.draw(self.screen, self.small_font)
 
             pygame.display.flip()
 

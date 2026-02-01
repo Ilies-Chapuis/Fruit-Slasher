@@ -5,6 +5,7 @@ import os
 from fruit import Fruit
 from player import Player
 from config import *
+from settings import Settings
 
 
 class Game:
@@ -25,6 +26,9 @@ class Game:
         self.current_input = ""
         self.running = True
 
+        # Mode de jeu
+        self.game_mode = settings.game_mode
+
         self.SPAWN_EVENT = pygame.USEREVENT + 1
         pygame.time.set_timer(self.SPAWN_EVENT, self.diff["spawn_delay"])
 
@@ -39,12 +43,16 @@ class Game:
             except Exception as e:
                 print(f"Erreur wallpaper: {e}")
 
+        # Afficher le mode de jeu
+        mode_name = "TYPING" if self.game_mode == "TYPING" else "CLICK"
+        print(f"Mode de jeu: {mode_name}")
+
     def spawn_fruit(self):
         is_bomb = random.random() < self.diff["BOMB_CHANCE"]
 
         if is_bomb:
             word = BOMB_WORD
-            image_path = None
+            image_path = BOMB_IMAGE
         else:
             word = random.choice(FRUITS)
             image_path = get_fruit_image_path(word)
@@ -57,7 +65,23 @@ class Game:
 
         self.fruits.append(Fruit(word, x, speed, is_bomb, image_path))
 
+    def handle_click(self, pos):
+        """Gère les clics sur les fruits (mode CLICK)"""
+        for fruit in self.fruits[:]:
+            fruit_rect = fruit.get_rect()
+            if fruit_rect.collidepoint(pos):
+                if fruit.is_bomb:
+                    # Pénalité pour cliquer sur une bombe
+                    self.player.lose_life()
+                    self.player.lose_life()
+                else:
+                    # Récompense pour cliquer sur un fruit
+                    self.player.add_score()
+                self.fruits.remove(fruit)
+                break
+
     def handle_input(self, event):
+        """Gère la saisie au clavier (mode TYPING)"""
         if event.key == pygame.K_BACKSPACE:
             self.current_input = self.current_input[:-1]
         elif event.key == pygame.K_RETURN:
@@ -67,6 +91,7 @@ class Game:
             self.current_input += event.unicode
 
     def check_word(self):
+        """Vérifie si le mot tapé correspond à un fruit"""
         for fruit in self.fruits[:]:
             if fruit.word == self.current_input:
                 if fruit.is_bomb:
@@ -92,17 +117,25 @@ class Game:
         lives = self.font.render(f"{t('lives')}: {self.player.lives}", True, (255, 80, 80))
         combo = self.font.render(f"{t('combo')}: x{self.player.combo}", True, (255, 200, 0))
 
-        input_surface = pygame.Surface((WIDTH - 20, 50))
-        input_surface.set_alpha(200)
-        input_surface.fill((30, 30, 30))
-        self.screen.blit(input_surface, (10, HEIGHT - 60))
-
-        input_txt = self.font.render(f"> {self.current_input}", True, (0, 255, 0))
-
         self.screen.blit(score, (10, 10))
         self.screen.blit(lives, (10, 40))
         self.screen.blit(combo, (10, 70))
-        self.screen.blit(input_txt, (20, HEIGHT - 50))
+
+        # Affichage selon le mode
+        if self.game_mode == "TYPING":
+            # Mode frappe : afficher l'input
+            input_surface = pygame.Surface((WIDTH - 20, 50))
+            input_surface.set_alpha(200)
+            input_surface.fill((30, 30, 30))
+            self.screen.blit(input_surface, (10, HEIGHT - 60))
+
+            input_txt = self.font.render(f"> {self.current_input}", True, (0, 255, 0))
+            self.screen.blit(input_txt, (20, HEIGHT - 50))
+        else:
+            # Mode clic : afficher l'instruction
+            instruction = self.font.render(t('click_fruits'), True, (255, 255, 0))
+            instruction_rect = instruction.get_rect(center=(WIDTH // 2, HEIGHT - 30))
+            self.screen.blit(instruction, instruction_rect)
 
     def draw_game_over(self):
         t = self.settings.t
@@ -146,12 +179,19 @@ class Game:
                 elif event.type == self.SPAWN_EVENT and not game_over:
                     self.spawn_fruit()
 
+                elif event.type == pygame.MOUSEBUTTONDOWN and not game_over:
+                    # Mode CLICK : gérer les clics
+                    if self.game_mode == "CLICK":
+                        self.handle_click(event.pos)
+
                 elif event.type == pygame.KEYDOWN:
                     if game_over:
                         if event.key == pygame.K_SPACE:
                             self.running = False
                     else:
-                        self.handle_input(event)
+                        # Mode TYPING : gérer la saisie
+                        if self.game_mode == "TYPING":
+                            self.handle_input(event)
 
             if not game_over and not self.player.alive():
                 game_over = True

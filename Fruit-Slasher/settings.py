@@ -7,12 +7,14 @@ class Settings:
         self.difficulty = "NORMAL"
         self.language = "FR"
         self.music = True
-        self.music_track = 0  # Index de la piste actuelle
+        self.music_track = 0
+        self.game_mode = "TYPING"  # Mode de jeu par défaut
+        self.keyboard_layout = "AZERTY"  # Clavier par défaut
 
-        # Charger les pistes de musique disponibles
+        # Charger les musiques
         self.music_files = self._load_music_files()
 
-        # Initialiser pygame mixer pour la musique
+        # Initialiser pygame mixer
         try:
             pygame.mixer.init()
             self.music_initialized = True
@@ -21,7 +23,7 @@ class Settings:
             print("Erreur: Impossible d'initialiser le systeme audio")
 
     def _load_music_files(self):
-        """Charge la liste des fichiers audio depuis Assets/Music/"""
+        """Charge la liste des fichiers audio"""
         music_paths = [
             "./Assets/Music/",
             "Assets/Music/",
@@ -35,7 +37,6 @@ class Settings:
             if os.path.exists(path):
                 try:
                     files = os.listdir(path)
-                    # Chercher les fichiers audio
                     audio_files = [
                         os.path.join(path, f) for f in files
                         if f.endswith(('.mp3', '.wav', '.ogg'))
@@ -49,7 +50,6 @@ class Settings:
 
         if not music_files:
             print("Aucune musique trouvee dans Assets/Music/")
-            # Fichiers par défaut (au cas où)
             music_files = ["track1.mp3", "track2.mp3", "track3.mp3"]
 
         return music_files
@@ -70,7 +70,7 @@ class Settings:
                 music_file = self.music_files[self.music_track]
                 if os.path.exists(music_file):
                     pygame.mixer.music.load(music_file)
-                    pygame.mixer.music.play(-1)  # -1 = boucle infinie
+                    pygame.mixer.music.play(-1)
                     print(f"Lecture: {os.path.basename(music_file)}")
                 else:
                     print(f"Fichier introuvable: {music_file}")
@@ -95,14 +95,17 @@ class Settings:
             "language": "Langue",
             "music": "Musique",
             "change_music": "Changer musique",
+            "game_mode": "Mode de jeu",
+            "keyboard": "Clavier",
             "back": "Retour",
             "score": "Score",
             "lives": "Vies",
             "combo": "Combo",
             "game_over": "GAME OVER",
-            "easy": "FACILE",
-            "normal": "NORMALE",
-            "hard": "DIFFICILE"
+            "typing_mode": "Frappe",
+            "click_mode": "Clic",
+            "click_fruits": "Cliquez sur les fruits !",
+            "type_word": "Tapez le mot",
         },
         "EN": {
             "play": "Play",
@@ -112,19 +115,22 @@ class Settings:
             "language": "Language",
             "music": "Music",
             "change_music": "Change music",
+            "game_mode": "Game mode",
+            "keyboard": "Keyboard",
             "back": "Back",
             "score": "Score",
             "lives": "Lives",
             "combo": "Combo",
             "game_over": "GAME OVER",
-            "easy": "Easy",
-            "hard": "Hard",
-            "normal": "Normal",
+            "typing_mode": "Typing",
+            "click_mode": "Click",
+            "click_fruits": "Click on fruits!",
+            "type_word": "Type the word",
         }
     }
 
     def t(self, key):
-        """Retourne la traduction pour une clé donnée"""
+        """Retourne la traduction"""
         return self.TEXTS[self.language].get(key, key)
 
     def cycle_language(self):
@@ -135,6 +141,16 @@ class Settings:
         """Change la difficulté"""
         levels = ["FACILE", "NORMAL", "DIFFICILE"]
         self.difficulty = levels[(levels.index(self.difficulty) + 1) % 3]
+
+    def cycle_game_mode(self):
+        """Change le mode de jeu"""
+        modes = ["TYPING", "CLICK"]
+        self.game_mode = modes[(modes.index(self.game_mode) + 1) % 2]
+
+    def cycle_keyboard(self):
+        """Change la configuration du clavier"""
+        layouts = ["AZERTY", "QWERTY", "QWERTZ"]
+        self.keyboard_layout = layouts[(layouts.index(self.keyboard_layout) + 1) % 3]
 
     def toggle_music(self):
         """Active/désactive la musique"""

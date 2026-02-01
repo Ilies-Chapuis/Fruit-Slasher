@@ -5,20 +5,20 @@ FPS = 60
 
 #  fruits avec leurs images
 FRUITS_IMAGES = {
-    "apple": "Red_Apple.png",
-    "banana": "Banana.png",
-    "cherry": "Cherry.png",
-    "kiwi": "Kiwi.png",
-    "orange": "Orange.png",
-    "peach": "Peach.png",
-    "pear": "Pear.png",
-    "melon": "Melon.png",
-    "avocado": "Avocado.png",
-    "grapes": "Grapes.png",
-    "lemon": "Lemon.png",
-    "pineapple": "Pinneaple.png",
-    "strawberry": "Strawberry.png",
-    "watermelon": "Watermelon.png"
+    "r": "Red Apple.png",
+    "b": "Banana.png",
+    "c": "Cherry.png",
+    "k": "Kiwi.png",
+    "o": "Orange.png",
+    "p": "Peach.png",
+    "d": "Pear.png",
+    "m": "Melon.png",
+    "a": "Avocado.png",
+    "g": "Grapes.png",
+    "l": "Lemon.png",
+    "pp": "Pinneaple.png",
+    "s": "Strawberry.png",
+    "w": "Watermelon.png"
 }
 
 FRUITS = list(FRUITS_IMAGES.keys())
@@ -27,7 +27,7 @@ FRUITS = list(FRUITS_IMAGES.keys())
 WALLPAPER_FILENAME = "Fruit Slasher Wallpaper (Bonus).jpg"
 
 BOMB_WORD = "bomb"
-BOMB_IMAGE = "Bomb.png"
+BOMB_IMAGE = "./Assets/Images/Bomb.png"
 BOMB_CHANCE = 0.15
 
 FRUIT_SPEED_MIN = 1
@@ -38,6 +38,13 @@ MAX_LIVES = 3
 FONT_SIZE = 32
 
 FRUIT_IMAGE_SIZE = 80
+
+# Modes de jeu
+GAME_MODES = ["TYPING", "CLICK"]
+
+# Configurations de clavier
+KEYBOARD_LAYOUTS = ["AZERTY", "QWERTY", "QWERTZ"]
+
 
 DIFFICULTY_CONFIG = {
     "FACILE": {
