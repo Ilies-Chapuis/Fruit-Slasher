@@ -16,7 +16,7 @@ def read_history():
         with open("history.txt", "r", encoding="utf-8") as f:
             for ligne in f:
                 score = ligne.strip().split(",")
-                history.append((mot, int(score), int(datetime)))
+                history.append((int(score), int(datetime)))
     except FileNotFoundError:
         pass
     except Exception as e:
