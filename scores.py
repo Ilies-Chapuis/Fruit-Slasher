@@ -9,7 +9,7 @@ class ScoreManager:
         self.scores = self.load_scores()
 
     def load_scores(self):
-        """Charge les scores depuis le fichier"""
+        #Charge les scores depuis le fichier
         if os.path.exists(self.filename):
             try:
                 with open(self.filename, 'r', encoding='utf-8') as f:

@@ -75,9 +75,9 @@ class Game:
         rand = random.random()
 
         # Récupérer les probabilités
-        bomb_chance = self.diff.get("BOMB_CHANCE", 0.15)
-        ice_chance = self.diff.get("ICE_CHANCE", 0.10)
-        golden_chance = self.diff.get("GOLDEN_CHANCE", 0.05)
+        bomb_chance = BOMB_CHANCE
+        ice_chance = ICE_CHANCE
+        golden_chance = Golden_CHANCE
 
         # Déterminer le type
         if rand < bomb_chance:
@@ -88,7 +88,7 @@ class Game:
         elif rand < bomb_chance + ice_chance:
             # Glaçon
             fruit_type = "ice"
-            word = "ice"
+            word = "i"
             image_path = ICE_IMAGE
         elif rand < bomb_chance + ice_chance + golden_chance:
             # Fruit bonus (golden)
@@ -343,4 +343,5 @@ class Game:
             else:
                 self.draw()
                 self.draw_game_over()
+                pygame.display.flip()
                 pygame.display.flip()

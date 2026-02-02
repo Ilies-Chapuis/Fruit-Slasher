@@ -1,5 +1,5 @@
 import os
-
+import random
 WIDTH, HEIGHT = 800, 600
 FPS = 60
 
@@ -18,8 +18,7 @@ FRUITS_IMAGES = {
     "l": "Lemon.png",
     "pp": "Pinneaple.png",
     "s": "Strawberry.png",
-    "w": "Watermelon.png",
-    "bonus": "golden fruit.jpg"
+    "w": "Watermelon.png"
 }
 
 FRUITS = list(FRUITS_IMAGES.keys())
@@ -27,15 +26,17 @@ FRUITS = list(FRUITS_IMAGES.keys())
 # Nom du fichier wallpaper
 WALLPAPER_FILENAME = "Fruit Slasher Wallpaper (Bonus).jpg"
 
-BOMB_WORD = "bomb"
+BOMB_WORD = "b"
 BOMB_IMAGE = "./Assets/Images/Bomb.png"
 BOMB_CHANCE = 0.15
 
-ICE_WORD = "ice"
+ICE_WORD = "i"
 ICE_IMAGE = "./Assets/Images/Ice Cube.png"
+ICE_CHANCE = 0.10
 
 GOLDEN_IMAGE = "./Assets/Images/Golden fruit.png"
 Golden_WORD = "bonus"
+Golden_CHANCE = 0.05
 
 FRUIT_SPEED_MIN = 1
 FRUIT_SPEED_MAX = 3

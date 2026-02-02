@@ -22,6 +22,13 @@
   },
   {
     "player": "Joueur",
+    "score": 365,
+    "difficulty": "NORMAL",
+    "mode": "CLICK",
+    "date": "2026-02-02 13:42:23"
+  },
+  {
+    "player": "Joueur",
     "score": 201,
     "difficulty": "DIFFICILE",
     "mode": "CLICK",
@@ -33,5 +40,40 @@
     "difficulty": "NORMAL",
     "mode": "CLICK",
     "date": "2026-02-02 08:45:59"
+  },
+  {
+    "player": "Joueur",
+    "score": 81,
+    "difficulty": "NORMAL",
+    "mode": "TYPING",
+    "date": "2026-02-02 13:40:56"
+  },
+  {
+    "player": "Joueur",
+    "score": 55,
+    "difficulty": "FACILE",
+    "mode": "TYPING",
+    "date": "2026-02-02 10:15:51"
+  },
+  {
+    "player": "Joueur",
+    "score": 5,
+    "difficulty": "NORMAL",
+    "mode": "TYPING",
+    "date": "2026-02-02 13:55:46"
+  },
+  {
+    "player": "Joueur",
+    "score": 0,
+    "difficulty": "NORMAL",
+    "mode": "TYPING",
+    "date": "2026-02-02 10:09:18"
+  },
+  {
+    "player": "Joueur",
+    "score": 0,
+    "difficulty": "NORMAL",
+    "mode": "TYPING",
+    "date": "2026-02-02 13:40:15"
   }
 ]
