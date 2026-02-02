@@ -18,7 +18,8 @@ FRUITS_IMAGES = {
     "l": "Lemon.png",
     "pp": "Pinneaple.png",
     "s": "Strawberry.png",
-    "w": "Watermelon.png"
+    "w": "Watermelon.png",
+    "bonus": "golden fruit.jpg"
 }
 
 FRUITS = list(FRUITS_IMAGES.keys())
@@ -29,6 +30,12 @@ WALLPAPER_FILENAME = "Fruit Slasher Wallpaper (Bonus).jpg"
 BOMB_WORD = "bomb"
 BOMB_IMAGE = "./Assets/Images/Bomb.png"
 BOMB_CHANCE = 0.15
+
+ICE_WORD = "ice"
+ICE_IMAGE = "./Assets/Images/Ice Cube.png"
+
+GOLDEN_IMAGE = "./Assets/Images/Golden fruit.png"
+Golden_WORD = "bonus"
 
 FRUIT_SPEED_MIN = 1
 FRUIT_SPEED_MAX = 3

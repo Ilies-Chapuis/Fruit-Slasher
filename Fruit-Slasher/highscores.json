@@ -1,0 +1,30 @@
+[
+  {
+    "player": "Joueur",
+    "score": 1098,
+    "difficulty": "NORMAL",
+    "mode": "CLICK",
+    "date": "2026-02-02 09:18:02"
+  },
+  {
+    "player": "Joueur",
+    "score": 839,
+    "difficulty": "NORMAL",
+    "mode": "CLICK",
+    "date": "2026-02-01 21:58:55"
+  },
+  {
+    "player": "Joueur",
+    "score": 201,
+    "difficulty": "DIFFICILE",
+    "mode": "CLICK",
+    "date": "2026-02-01 22:01:15"
+  },
+  {
+    "player": "Joueur",
+    "score": 81,
+    "difficulty": "NORMAL",
+    "mode": "CLICK",
+    "date": "2026-02-02 08:45:59"
+  }
+]
