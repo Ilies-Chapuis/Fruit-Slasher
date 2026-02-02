@@ -33,7 +33,7 @@ pygame.display.set_caption("Fruit Slasher")
 clock = pygame.time.Clock()
 
 # ======================
-# BACKGROUND (SEULE MODIF ICI)
+# BACKGROUND 
 # ======================
 background = pygame.image.load(
     "Fond_Gameplay/Fruit_Slasher_Wallpaper_Bonus.jpg"
